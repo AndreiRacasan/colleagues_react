@@ -1,13 +1,14 @@
 import React from 'react';
+import { List } from "@material-ui/core";
 import Colleague from './Colleague';
 
-function ColleagueList({colleagues}) {
+function ColleagueList({colleagues, toggleComplete, removeColleague}) {
   return (
-    <ul>
+    <List>
       {colleagues.map(colleague => (
-        <Colleague key={colleague.id} colleague={colleague} />
+        <Colleague key={colleague.id} colleague={colleague} toggleComplete={toggleComplete} removeColleague={removeColleague}/>
       ))}
-    </ul>
+    </List>
   )
 }
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import Typography from "@material-ui/core/Typography";
 import ColleagueForm from './comps/ColleagueForm';
 import ColleagueList from './comps/ColleagueList';
 import './App.css';
@@ -27,15 +28,31 @@ function App() {
   }
 
   function toggleComplete(id) {
-    // do smth
+    setColleagues(
+      colleagues.map(colleague => {
+        if(colleague.id === id) {
+          return {
+            ...colleague,
+            removed: !colleague.removed
+          }
+        }
+        return colleague;
+      })
+    );
+  }
+
+  function removeColleague(id) {
+    setColleagues(colleagues.filter(colleague => colleague.id !== id));
   }
 
   return (
-    <header className="app-header">
-      <p>Bloc Colleagues</p>
+    <div className="App">
+    <Typography variant="h3" style={{padding: 10}}>
+      Colleagues List
+    </Typography>
       <ColleagueForm addColleague={addColleague} />
-      <ColleagueList colleagues={colleagues} />
-    </header>
+      <ColleagueList colleagues={colleagues} toggleComplete={toggleComplete} removeColleague={removeColleague}/>
+    </div>
   );
 }
 

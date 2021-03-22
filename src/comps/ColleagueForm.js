@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Button, TextField } from "@material-ui/core";
 import {v4 as uuid} from "uuid"; 
 
 function ColleagueForm({addColleague}) {
@@ -15,16 +16,16 @@ function ColleagueForm({addColleague}) {
   function handleSubmit(e) {
     e.preventDefault();
     if (colleague.name.trim()) {
-      addColleague({...colleague, id: uuid.v4 });
+      addColleague({...colleague, id: uuid() });
       // set input to ''
       setColleague({ ...colleague, name: '' });
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="colleague" type="text" value={colleague.name} onChange={handleTaskInputChange} />
-      <button type="submit">Add</button>
+    <form className="form" onSubmit={handleSubmit}>
+      <TextField label="colleague" name="colleague" type="text" value={colleague.name} onChange={handleTaskInputChange} />
+      <Button type="submit">Add</Button>
     </form>
   )
 
